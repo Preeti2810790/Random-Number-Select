@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <p>Number Gussing Game</p>
+        </div>
+        <div class="innerpara">
+            <p>Try and Guuess a random number between 1 and 100 You Have 10 attempts to guess the right Number</p>
+            <h1 class="head1">Guess a Number</h1>
+            <input type="text" class="numberinput" id="numberinput">
+        </div>
+        <div class="button">
+            <button type="submit" id="submit" class="guesssubmit">Submit Guess</button>
+        </div>
+       <div class="para">
+        <p>Previous Guesses :<span id="guessslot"></span> </p>
+       <p>Guesses Remaining : <span id="latresult">10</span></p>
+       <p class="loworhi"></p>
+       </div>
+    </div>
+    <script>
+       let randomnumber = parseInt(Math.random()*100+1); 
+    //    console.log(randomnumber); 
+              //+1 islia because 0 na aae
+              const submit = document.querySelector('#submit')
+              const userinput = document.querySelector('#numberinput')
+              const guessslot = document.querySelector('#guessslot')
+              const remaining = document.querySelector('#latresult')
+              const loworhi = document.querySelector('.loworhi')
+              const startover = document.querySelector('.para')
+              //insert para somewhere then first creat here
+              const p = document.createElement('p')
+              //user ko previous guess sarai show kraigai taki vo dobaraa  un no. ko no likhai 
+              let prevguess = [];
+              //how many attempts  they do
+              let numGuess = 1;
+              //game khailnai kai lia allow karta hai agar hmarra coin khatam ho gya to check kraiga or aagai
+              //nhi hoga continue
+              let playGame =  true;
+
+              if(playGame){
+                submit.addEventListener('click', function(e){
+                    // e.preventDefault();
+                    const guess = parseInt(userinput.value);
+                    console.log(guess);
+                    validateGuess(guess);
+                })
+              }
+
+//method==  ismai check kraigai ki value 1 to 100 hi pass ho abcd ya 100 sai jayada na pass ho
+              function validateGuess(guess){
+             if(isNaN(guess)){
+                alert('Please enter a valid number')
+             }else if(guess <1){
+                alert('Please enter a number more than 1')
+             }
+             else if(guess >100){
+                alert('Please enter a number less than 100')
+             }else{
+                //push in array
+                prevguess.push(guess)
+                //check game over or not
+                if(numGuess===10){
+                    displayGuess(guess)
+                    displayMessage(`Game over random number was ${randomnumber}`)
+                    endGame()
+                }else{
+                    displayGuess(guess)
+                    checkguess(guess)
+                }
+             }
+
+              }
+
+              //checkguess method low high check
+              function checkguess(guess){
+if(guess===randomnumber){
+    displayMessage(`You Gusted Right`)
+    endGame()
+
+}else if(guess < randomnumber){
+    displayMessage(`Number is Too low`)
+}
+else if(guess > randomnumber){
+    displayMessage(`Number is Too high`)
+}
+              }
+
+
+              //value ko clean kraiga guess array ko update remaining ko update kraiga
+function displayGuess(guess){
+    //value khali kar daiga
+userinput.value = ''
+//add inner html
+guessslot.innerHTML += `${guess}   `
+//add guess num wala
+numGuess++;
+remaining.innerHTML = `${11-numGuess}`
+
+
+}
+
+              //display message interact with dom
+              function displayMessage(message){
+loworhi.innerHTML = `<h2>${message} </h2>`
+              }
+
+
+              //method for end game or start game
+
+              function endGame(){
+userinput.value = ''
+userinput.setAttribute('disabled','')
+//add button 
+p.classList.add('button')
+p.innerHTML = `<h2 id="newGame">Start new Game</h2> `
+startover.appendChild(p)
+playGame = false
+newGame()
+              }
+
+
+              function newGame(){
+const newGameButton = document.querySelector('#newGame')
+newGameButton.addEventListener('click',function(e){
+    let randomnumber = parseInt(Math.random()*100+1);  
+    //previous guess reset 
+    prevguess = []
+    //start no. of guesses
+    numGuess = 1
+    //empty guess inner 
+guessslot.innerHTML = ''
+remaining.innerHTML = `${11-numGuess}   `;
+userinput.removeAttribute('disabled')
+startover.removeChild(p)
+    playgame =true
+})
+              }
+    </script>
+    
+</body>
+</html>
