@@ -1,0 +1,66 @@
+*{
+    margin:0px;
+padding: 0px;
+box-sizing: border-box;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background-color: beige;
+}
+.container{
+    width:450px;
+    height: min-content;
+    background-color: rgb(16, 121, 212);
+    border-radius: 10px;
+
+}
+#newGame{background-color: aliceblue;
+    padding: 10px;
+}
+.header{width:100%;
+text-align: center;
+font-size: 25px;
+border-radius: 10px;
+background-color: yellow;
+padding: 20px;}
+.innerpara{
+    width: 100%;
+padding: 20px;
+text-align: center;
+}
+.head1{
+    text-align: center;
+    margin-top: 25px;
+    color:white;
+    font-weight: 800;
+    font-size: 3rem;
+
+}
+.numberinput{
+    margin-top: 10px;
+    padding: 10px;
+}
+.button{width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.button button{
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 800;
+    color:white;
+    background-color: black;
+
+}
+.para{
+    text-align: center;
+    padding: 10px;
+}
